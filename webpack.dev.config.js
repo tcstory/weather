@@ -38,6 +38,10 @@ module.exports = {
                 loader: 'url'
             },
             {
+                test: /\.(woff|eot|ttf).*?$/i,
+                loader: 'url?limit=10000&name=fonts/[name].[ext]'
+            },
+            {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style', 'css!postcss')
             },

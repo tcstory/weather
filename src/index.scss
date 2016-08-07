@@ -1,0 +1,41 @@
+@import "./components/basic-css/index.scss";
+
+#app {
+    min-height: 100vh;
+    background-color: #59A0F3;
+    .menu-btn {
+        width: 2.75em;
+        height: 2.75em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        .fa {
+            font-size: 1.5em;
+        }
+    }
+    .weather-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1.25em;
+        .weather-icon {
+            background-image: url(./components/weather-icons/haze-day.png);
+            width: 50vw;
+            height: 50vw;
+            background-size: contain;
+            margin-bottom: 1em;
+        }
+        .city-name {
+            margin-bottom: .5em;
+            .text {
+                color: hsl(0, 0%, 100%);
+            }
+        }
+        .temperature {
+            font-size: 3em;
+            color: white;
+        }
+    }
+}
+

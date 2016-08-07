@@ -25,5 +25,9 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "pubsub-js": "^1.5.3",
+    "superagent": "^2.1.0"
   }
 }
