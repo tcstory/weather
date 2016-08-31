@@ -20,11 +20,14 @@
         align-items: center;
         margin-top: 1.25em;
         .weather-icon {
-            background-image: url(./components/weather-icons/haze-day.png);
             width: 50vw;
             height: 50vw;
             background-size: contain;
             margin-bottom: 1em;
+        }
+        .weather-text {
+            font-size: 1.25em;
+            color: white;
         }
         .city-name {
             margin-bottom: .5em;
