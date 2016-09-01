@@ -3,7 +3,8 @@
   "description": "",
   "author": "tcstory",
   "scripts": {
-    "dev": "node webpack.dev.server.js"
+    "dev": "node webpack.dev.server.js",
+    "build": "webpack --config webpack.prod.config.js"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.7",
