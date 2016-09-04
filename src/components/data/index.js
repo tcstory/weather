@@ -12,6 +12,15 @@ const Data = {
       })
       .end(cb);
   },
+  fetchCityList(cb) {
+    request
+      .get('https://api.heweather.com/x3/citylist')
+      .query({
+        key,
+        search: 'allchina',
+      })
+      .end(cb);
+  },
 };
 
 export default Data;
