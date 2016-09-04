@@ -8,10 +8,10 @@ require('./index.scss');
 
 let App = {
     init() {
-        this._weatherIconEl = document.querySelector('.weather-icon');
-        this._weatherText = document.querySelector('.weather-text');
-        this._citynameEl = document.querySelector('.city-name .text');
-        this._temperatureEl = document.querySelector('.temperature');
+        this._weatherIconEl = document.querySelector('.weather-wrapper__weather-preview ');
+        this._weatherText = document.querySelector('.weather-wrapper__weather-text');
+        this._citynameEl = document.querySelector('.weather-wrapper__city-name-text');
+        this._temperatureEl = document.querySelector('.weather-wrapper__temperature');
     },
     fetchDefaultWeather(cityId) {
         Data.fetchWeather(cityId, (err, res) => {

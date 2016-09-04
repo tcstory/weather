@@ -1,44 +1,51 @@
 @import "./components/basic-css/index.scss";
 
 #app {
-    min-height: 100vh;
-    background-color: #59A0F3;
-    .menu-btn {
-        width: 2.75em;
-        height: 2.75em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        .fa {
-            font-size: 1.5em;
-        }
-    }
-    .weather-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 1.25em;
-        .weather-icon {
-            width: 50vw;
-            height: 50vw;
-            background-size: contain;
-            margin-bottom: 1em;
-        }
-        .weather-text {
-            font-size: 1.25em;
-            color: white;
-        }
-        .city-name {
-            margin-bottom: .5em;
-            .text {
-                color: hsl(0, 0%, 100%);
-            }
-        }
-        .temperature {
-            font-size: 3em;
-            color: white;
-        }
-    }
+  min-height: 100vh;
+  background-color: #59A0F3;
 }
 
+.menu-btn {
+  width: 2.75em;
+  height: 2.75em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.menu-btn__icon {
+  font-size: 1.5em;
+}
+
+.weather-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.25em;
+}
+
+.weather-wrapper__city-name {
+  margin-bottom: .5em;
+}
+
+.weather-wrapper__city-name-text {
+  color: hsl(0, 0%, 100%);
+}
+
+.weather-wrapper__weather-preview {
+  width: 50vw;
+  height: 50vw;
+  background-size: contain;
+  margin-bottom: 1em;
+}
+
+.weather-wrapper__weather-text {
+  font-size: 1.25em;
+  color: white;
+}
+
+.weather-wrapper__temperature {
+  font-size: 3em;
+  color: white;
+}
