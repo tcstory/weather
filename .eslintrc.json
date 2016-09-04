@@ -1,26 +1,30 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "extends": [
+    "airbnb-base"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
     },
-    "extends": [
-        "eslint:recommended"
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": 0,
+    "linebreak-style": [
+      "error",
+      "unix"
     ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true
-        },
-        "sourceType": "module"
-    },
-    "rules": {
-        "no-console": 0,
-        "linebreak-style": [
-            "error",
-            "unix"
-        ]
-    },
-    "globals": {
-        "__DEV__": true
-    }
+    "no-underscore-dangle": 0,
+    "prefer-arrow-callback": 0,
+    "no-lonely-if": 0,
+    "quote-props": 0
+  },
+  "globals": {
+    "__DEV__": true
+  }
 }
