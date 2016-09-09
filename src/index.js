@@ -1,8 +1,11 @@
+import PubSub from 'pubsub-js';
 import Data from './components/data';
 import store from './components/store';
 import weatherIcon from './components/weather-icons';
 
 require('./index.scss');
+
+import Sidebar from './components/sidebar';
 
 const App = {
   init() {
@@ -10,6 +13,19 @@ const App = {
     this._weatherText = document.querySelector('.weather-wrapper__weather-text');
     this._citynameEl = document.querySelector('.weather-wrapper__city-name-text');
     this._temperatureEl = document.querySelector('.weather-wrapper__temperature');
+    this._menuBtnEl = document.querySelector('.menu-btn');
+    this._bindEvents();
+    Sidebar.init();
+    document.body.appendChild(Sidebar.makeSidebar());
+  },
+  _bindEvents() {
+    document.body.addEventListener('click', (ev) => {
+      PubSub.publish('onBodyClick');
+    });
+    this._menuBtnEl.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      PubSub.publish('onMenuBtnClick');
+    });
   },
   fetchDefaultWeather(cityId) {
     Data.fetchWeather(cityId, (err, res) => {

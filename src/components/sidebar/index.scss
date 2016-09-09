@@ -1,0 +1,14 @@
+.sidebar {
+  width: 80%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: white;
+  transform: translate(-100%);
+  transition: all ease-out 300ms;
+}
+
+.sidebar--open {
+  transform: translate(0);
+}
