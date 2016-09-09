@@ -1,4 +1,5 @@
 import PubSub from 'pubsub-js';
+
 require('./index.scss');
 
 let initialize = false;
@@ -11,14 +12,14 @@ const sidebar = {
 function init() {
   if (!initialize) {
     initialize = true;
-    PubSub.subscribe('onBodyClick', (eventStr, data) => {
+    PubSub.subscribe('onBodyClick', () => {
       sidebar.el.classList.remove('sidebar--open');
     });
-    PubSub.subscribe('onMenuBtnClick', (eventStr, data) => {
+    PubSub.subscribe('onMenuBtnClick', () => {
       sidebar.el.classList.add('sidebar--open');
     });
   } else {
-    _warmMultipleInitalize();
+    _warmMultipleInitialize();
   }
 }
 
@@ -37,7 +38,7 @@ function makeSidebar() {
   }
 }
 
-function _warmMultipleInitalize() {
+function _warmMultipleInitialize() {
   throw new Error(MULTIPLE_INITIALIZE);
 }
 
