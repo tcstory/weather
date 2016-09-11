@@ -12,10 +12,10 @@ const sidebar = {
 function init() {
   if (!initialize) {
     initialize = true;
-    PubSub.subscribe('onBodyClick', () => {
+    PubSub.subscribe('closeSidebar', () => {
       sidebar.el.classList.remove('sidebar--open');
     });
-    PubSub.subscribe('onMenuBtnClick', () => {
+    PubSub.subscribe('openSidebar', () => {
       sidebar.el.classList.add('sidebar--open');
     });
   } else {

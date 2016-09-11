@@ -30,6 +30,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "hammerjs": "^2.0.8",
     "pubsub-js": "^1.5.3",
     "superagent": "^2.1.0"
   }

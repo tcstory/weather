@@ -1,4 +1,5 @@
 import PubSub from 'pubsub-js';
+import Hammer from 'hammerjs';
 import Data from './components/data';
 import store from './components/store';
 import weatherIcon from './components/weather-icons';
@@ -9,22 +10,35 @@ import Sidebar from './components/sidebar';
 
 const App = {
   init() {
+    this._rootEl = document.querySelector('#app');
     this._weatherIconEl = document.querySelector('.weather-wrapper__weather-preview ');
     this._weatherText = document.querySelector('.weather-wrapper__weather-text');
     this._citynameEl = document.querySelector('.weather-wrapper__city-name-text');
     this._temperatureEl = document.querySelector('.weather-wrapper__temperature');
     this._menuBtnEl = document.querySelector('.menu-btn');
     this._bindEvents();
+    this._addMultiTouchGesture();
     Sidebar.init();
-    document.body.appendChild(Sidebar.makeSidebar());
+    this._rootEl.appendChild(Sidebar.makeSidebar());
   },
   _bindEvents() {
-    document.body.addEventListener('click', (ev) => {
-      PubSub.publish('onBodyClick');
+    this._rootEl.addEventListener('click', (ev) => {
+      PubSub.publish('closeSidebar');
     });
     this._menuBtnEl.addEventListener('click', (ev) => {
       ev.stopPropagation();
-      PubSub.publish('onMenuBtnClick');
+      PubSub.publish('openSidebar');
+    });
+  },
+  _addMultiTouchGesture() {
+    this._gestureManager = new Hammer.Manager(this._rootEl);
+    const pan = new Hammer.Pan();
+    this._gestureManager.add(pan);
+    this._gestureManager.on('panright', (ev) => {
+      PubSub.publish('openSidebar');
+    });
+    this._gestureManager.on('panleft', (ev) => {
+      PubSub.publish('closeSidebar');
     });
   },
   fetchDefaultWeather(cityId) {
