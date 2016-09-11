@@ -5,6 +5,12 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var postPxToEm = require('postcss-px-to-em');
 
+var flag = false;
+process.argv.forEach(function (item) {
+  if (item === '--precache') {
+    flag = true;
+  }
+});
 
 module.exports = {
     entry: {
@@ -63,3 +69,24 @@ module.exports = {
     }
 };
 
+if (flag) {
+  module.exports.plugins.push(
+    new AddHook()
+  )
+}
+
+function AddHook(options) {
+}
+
+AddHook.prototype.apply = function(compiler) {
+  // ...
+  compiler.plugin('compilation', function(compilation) {
+    console.log('The compiler is starting a new compilation...');
+
+    compilation.plugin('html-webpack-plugin-after-html-processing', function(htmlPluginData, callback) {
+      htmlPluginData.html = htmlPluginData.html.replace(/<\/body>/i, '<!-- endbuild --><\/body>');
+      callback(null, htmlPluginData);
+    });
+  });
+
+};
