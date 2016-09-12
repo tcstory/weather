@@ -26,6 +26,7 @@
     "node-sass": "^3.8.0",
     "postcss-loader": "^0.9.1",
     "postcss-px-to-em": "^1.0.1",
+    "run-sequence": "^1.2.2",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "sw-precache": "^4.0.0",

@@ -84,6 +84,7 @@ AddHook.prototype.apply = function(compiler) {
     console.log('The compiler is starting a new compilation...');
 
     compilation.plugin('html-webpack-plugin-after-html-processing', function(htmlPluginData, callback) {
+      // 用一些黑科技来添加标记
       htmlPluginData.html = htmlPluginData.html.replace(/<\/body>/i, '<!-- endbuild --><\/body>');
       callback(null, htmlPluginData);
     });
