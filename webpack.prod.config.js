@@ -13,81 +13,64 @@ process.argv.forEach(function (item) {
 });
 
 module.exports = {
-    entry: {
-        app: ['./src/index.js']
-    },
-    output: {
-        path: path.resolve(__dirname, './dist'),
-        publicPath: '/',
-        filename: 'js/[name].[chunkhash:6].js',
-        chunkFilename: "js/chunk/[name].[chunkhash:6].js"
-    },
-    resolveLoader: {
-        root: path.join(__dirname, 'node_modules')
-    },
-    resolve: {
-        extensions: ['', '.js'],
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loaders: ['babel-loader']
-            },
-            {
-                test: /\.(png|jpg|gif|svg)$/,
-                loader: 'url?limit=10000&name=images/[name].[hash:6].[ext]'
-            },
-            {
-                test: /\.(woff|eot|ttf).*?$/i,
-                loader: 'url?limit=10000&name=fonts/[name].[hash:6].[ext]'
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style', 'css!postcss')
-            },
-            {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
-            }
-        ]
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            filename: 'index.html',
-            inject: 'body'
-        }),
-        new ExtractTextPlugin('css/[name].[chunkhash:6].css'),
-        new webpack.DefinePlugin({
-            __DEV__: false
-        })
-    ],
-    postcss: function () {
-        return [autoprefixer, postPxToEm({base: 16})];
-    }
+  entry: {
+    app: ['./src/index.js'],
+  },
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/',
+    filename: 'js/[name].[chunkhash:6].js',
+    chunkFilename: "js/chunk/[name].[chunkhash:6].js"
+  },
+  resolveLoader: {
+    root: path.join(__dirname, 'node_modules')
+  },
+  resolve: {
+    extensions: ['', '.js'],
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: ['babel-loader']
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'url?limit=10000&name=images/[name].[hash:6].[ext]'
+      },
+      {
+        test: /\.(woff|eot|ttf).*?$/i,
+        loader: 'url?limit=10000&name=fonts/[name].[hash:6].[ext]'
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css!postcss')
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+      inject: 'body'
+    }),
+    new ExtractTextPlugin('css/[name].[chunkhash:6].css'),
+    new webpack.DefinePlugin({
+      __DEV__: false
+    })
+  ],
+  postcss: function () {
+    return [autoprefixer, postPxToEm({base: 16})];
+  }
 };
 
 if (flag) {
-  module.exports.plugins.push(
-    new AddHook()
-  )
+  module.exports.entry = Object.assign(module.exports.entry, {
+    'service-worker-registration': ['./src/service-worker-registration.js']
+  })
 }
-
-function AddHook(options) {
-}
-
-AddHook.prototype.apply = function(compiler) {
-  // ...
-  compiler.plugin('compilation', function(compilation) {
-    console.log('The compiler is starting a new compilation...');
-
-    compilation.plugin('html-webpack-plugin-after-html-processing', function(htmlPluginData, callback) {
-      // 用一些黑科技来添加标记
-      htmlPluginData.html = htmlPluginData.html.replace(/<\/body>/i, '<!-- endbuild --><\/body>');
-      callback(null, htmlPluginData);
-    });
-  });
-
-};

@@ -3,10 +3,10 @@ var del = require('del');
 var swPrecache = require('sw-precache');
 var $ = require('gulp-load-plugins')();
 var path = require('path');
-var htmlreplace = require('gulp-html-replace');
 var webpack = require('webpack');
 var gulpWebpack = require('webpack-stream');
 var runSequence = require('run-sequence');
+var express = require('express');
 
 var rootDir = 'dist';
 
@@ -15,7 +15,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build', function (done) {
-  runSequence('clean', 'webpack', 'replace', done);
+  runSequence('clean', 'webpack', done);
 });
 
 gulp.task('webpack', function () {
@@ -24,18 +24,25 @@ gulp.task('webpack', function () {
     .pipe(gulp.dest(rootDir));
 });
 
-gulp.task('replace', function () {
-  gulp.src(path.join(rootDir,'index.html'))
-    .pipe(htmlreplace({
-      precache: 'service-worker.js'
-    }))
-    .pipe(gulp.dest(rootDir))
-})
-
 gulp.task('precache', function (cb) {
-  writeServiceWorkerFile(rootDir, false, cb);
+  writeServiceWorkerFile(rootDir, true, cb);
 });
 
+gulp.task('server', function () {
+  runExpress(4000, rootDir);
+});
+
+function runExpress(port, rootDir) {
+  var app = express();
+
+  app.use(express.static(rootDir));
+
+  var server = app.listen(port, function() {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('Server running at http://%s:%s', host, port);
+  });
+}
 
 function writeServiceWorkerFile(rootDir, handleFetch, callback) {
   var config = {
@@ -48,7 +55,6 @@ function writeServiceWorkerFile(rootDir, handleFetch, callback) {
     staticFileGlobs: [
       rootDir + '/css/**.css',
       rootDir + '/**.html',
-      rootDir + '/images/**.*',
       rootDir + '/js/**.js'
     ],
     stripPrefix: rootDir + '/',
