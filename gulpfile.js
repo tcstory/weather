@@ -69,6 +69,17 @@ function writeServiceWorkerFile(rootDir, handleFetch, callback) {
       rootDir + '/**.html',
       rootDir + '/js/**.js'
     ],
+    runtimeCaching: [
+      {
+        // See https://github.com/GoogleChrome/sw-toolbox#methods
+        urlPattern: /https:\/\/api.heweather.com\/x3\/weather/,
+        handler: 'networkFirst',
+      },
+      {
+        urlPattern: /\/images\//,
+        handler: 'cacheFirst'
+      }
+    ],
     stripPrefix: rootDir + '/',
     // verbose defaults to false, but for the purposes of this demo, log more.
     verbose: true
