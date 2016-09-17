@@ -15,7 +15,19 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build', function (done) {
-  runSequence('clean', 'webpack', done);
+  let flag = false;
+  process.argv.forEach(function (item) {
+    if (item === '--precache') {
+      flag = true;
+    } else {
+      flag = false;
+    }
+  });
+  if (flag) {
+    runSequence('clean', 'webpack', 'precache', done);
+  } else {
+    runSequence('clean', 'webpack', done);
+  }
 });
 
 gulp.task('webpack', function () {
