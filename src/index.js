@@ -18,16 +18,16 @@ const App = {
     this._menuBtnEl = document.querySelector('.menu-btn');
     this._bindEvents();
     this._addMultiTouchGesture();
-    Sidebar.init();
-    this._rootEl.appendChild(Sidebar.makeSidebar());
+    this._sidebar = new Sidebar();
+    this._rootEl.appendChild(this._sidebar.getDom());
   },
   _bindEvents() {
     this._rootEl.addEventListener('click', (ev) => {
-      PubSub.publish('closeSidebar');
+      this._sidebar.closeSidebar();
     });
     this._menuBtnEl.addEventListener('click', (ev) => {
       ev.stopPropagation();
-      PubSub.publish('openSidebar');
+      this._sidebar.openSidebar();
     });
   },
   _addMultiTouchGesture() {
@@ -35,10 +35,10 @@ const App = {
     const pan = new Hammer.Pan();
     this._gestureManager.add(pan);
     this._gestureManager.on('panright', (ev) => {
-      PubSub.publish('openSidebar');
+      this._sidebar.openSidebar();
     });
     this._gestureManager.on('panleft', (ev) => {
-      PubSub.publish('closeSidebar');
+      this._sidebar.closeSidebar();
     });
   },
   fetchDefaultWeather(cityId) {
