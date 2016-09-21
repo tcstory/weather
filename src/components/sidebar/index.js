@@ -1,3 +1,8 @@
+import _Hammer from 'hammerjs';
+import propagating from 'propagating-hammerjs';
+
+const Hammer = propagating(_Hammer);
+
 import { setProto } from '../utils';
 
 require('./index.scss');
@@ -6,7 +11,9 @@ function Sidebar() {
   const el = document.createElement('aside');
   el.className = 'sidebar';
   el.innerHTML = ``;
-  el.addEventListener('click', function (ev) {
+  const mc = new Hammer.Manager(el);
+  mc.add(new Hammer.Tap());
+  mc.on('tap', (ev) => {
     ev.stopPropagation();
   });
   this._el = el;

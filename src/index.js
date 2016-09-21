@@ -1,8 +1,11 @@
 import PubSub from 'pubsub-js';
-import Hammer from 'hammerjs';
+import propagating from 'propagating-hammerjs';
+import _Hammer from 'hammerjs';
 import Data from './components/data';
 import store from './components/store';
 import weatherIcon from './components/weather-icons';
+
+const Hammer = propagating(_Hammer);
 
 require('./index.scss');
 
@@ -22,12 +25,17 @@ const App = {
     this._rootEl.appendChild(this._sidebar.getDom());
   },
   _bindEvents() {
-    this._rootEl.addEventListener('click', (ev) => {
+    const mc1 = new Hammer.Manager(this._rootEl);
+    mc1.add(new Hammer.Tap());
+    mc1.on('tap', (ev) => {
       this._sidebar.closeSidebar();
     });
-    this._menuBtnEl.addEventListener('click', (ev) => {
-      ev.stopPropagation();
+
+    const mc2 = new Hammer.Manager(this._menuBtnEl);
+    mc2.add(new Hammer.Tap());
+    mc2.on('tap', (ev) => {
       this._sidebar.openSidebar();
+      ev.stopPropagation();
     });
   },
   _addMultiTouchGesture() {
