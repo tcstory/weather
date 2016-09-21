@@ -5,11 +5,11 @@ import Data from './components/data';
 import store from './components/store';
 import weatherIcon from './components/weather-icons';
 
-const Hammer = propagating(_Hammer);
+import Sidebar from './components/sidebar';
 
 require('./index.scss');
 
-import Sidebar from './components/sidebar';
+const Hammer = propagating(_Hammer);
 
 const App = {
   init() {
