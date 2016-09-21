@@ -5,6 +5,12 @@
   background-color: #59A0F3;
 }
 
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 4px 0;
+}
+
 .menu-btn {
   width: 2.75em;
   height: 2.75em;
@@ -43,6 +49,32 @@
   position: absolute;
   transform: translateY(.6em);
   border-radius: 4px;
+}
+
+.add-new-city-btn {
+  width: 2.75em;
+  height: 2.75em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+}
+
+%style-add-new-city-btn__line {
+  display: inline-block;
+  width: 60%;
+  height: 10%; // 当按钮是button元素的时候,height是不生效的,改成div就可以了..........
+  background: white;
+}
+.add-new-city-btn__h-line {
+  @extend %style-add-new-city-btn__line;
+}
+
+.add-new-city-btn__v-line {
+  @extend %style-add-new-city-btn__line;
+  position: absolute;
+  transform: rotate(90deg);
 }
 
 .weather-wrapper {
