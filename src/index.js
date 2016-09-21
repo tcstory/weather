@@ -6,6 +6,7 @@ import store from './components/store';
 import weatherIcon from './components/weather-icons';
 
 import Sidebar from './components/sidebar';
+import SearchBox from './components/search-box';
 
 require('./index.scss');
 
@@ -23,6 +24,8 @@ const App = {
     this._addMultiTouchGesture();
     this._sidebar = new Sidebar();
     this._rootEl.appendChild(this._sidebar.getDom());
+    this._searchBox = new SearchBox();
+    this._rootEl.appendChild(this._searchBox.getDom());
   },
   _bindEvents() {
     const mc1 = new Hammer.Manager(this._rootEl);
@@ -53,8 +56,19 @@ const App = {
     Data.fetchWeather(cityId, (err, res) => {
       if (!err) {
         const info = res.body['HeWeather data service 3.0'][0];
-        store.cacheWeather(cityId, info);
+        store.setWeather(cityId, info);
         this.showWeather(cityId);
+      } else {
+        if (__DEV__) {
+          console.log(err);
+        }
+      }
+    });
+  },
+  fetchCityList() {
+    Data.fetchCityList((err, res) => {
+      if (!err) {
+        store.setCityList(res.body.city_info);
       } else {
         if (__DEV__) {
           console.log(err);
@@ -75,4 +89,5 @@ window.addEventListener('DOMContentLoaded', function () {
   App.init();
   const defaultCityId = 'CN101280601';
   App.fetchDefaultWeather(defaultCityId);
+  App.fetchCityList();
 });
