@@ -67,7 +67,8 @@ module.exports = {
     ],
     postcss: function () {
         return [autoprefixer, postPxToEm({base: 16})];
-    }
+    },
+    devtool: 'cheap-module-eval-source-map'
 };
 
 if (process.env.AUTO === '1') {
