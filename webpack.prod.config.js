@@ -62,7 +62,10 @@ module.exports = {
     new ExtractTextPlugin('css/[name].[chunkhash:6].css'),
     new webpack.DefinePlugin({
       __DEV__: false
-    })
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {warnings: false}
+    }),
   ],
   postcss: function () {
     return [autoprefixer, postPxToEm({base: 16})];
