@@ -2,7 +2,7 @@
 
 #app {
   min-height: 100vh;
-  background-color: #59A0F3;
+  background-color: #59a0f3;
 }
 
 .btn-row {
@@ -67,12 +67,14 @@
   height: 10%; // 当按钮是button元素的时候,height是不生效的,改成div就可以了..........
   background: white;
 }
+
 .add-new-city-btn__h-line {
   @extend %style-add-new-city-btn__line;
 }
 
 .add-new-city-btn__v-line {
   @extend %style-add-new-city-btn__line;
+
   position: absolute;
   transform: rotate(90deg);
 }

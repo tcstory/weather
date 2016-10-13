@@ -4,6 +4,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var postPxToEm = require('postcss-px-to-em');
+var StyleLintPlugin = require('stylelint-webpack-plugin');
 
 var flag = false;
 process.argv.forEach(function (item) {
@@ -72,6 +73,10 @@ module.exports = {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {warnings: false}
+    }),
+    new StyleLintPlugin({
+      configFile: '.stylelintrc',
+      failOnError: true,
     }),
   ],
   postcss: function () {
