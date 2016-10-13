@@ -29,6 +29,13 @@ module.exports = {
     extensions: ['', '.js'],
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        loader: "eslint-loader",
+        exclude: /node_modules/
+      }
+    ],
     loaders: [
       {
         test: /\.js$/,
@@ -69,6 +76,9 @@ module.exports = {
   ],
   postcss: function () {
     return [autoprefixer, postPxToEm({base: 16})];
+  },
+  eslint: {
+    failOnError: true
   },
   devtool: 'cheap-module-source-map'
 };

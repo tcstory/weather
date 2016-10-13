@@ -1,4 +1,3 @@
-import PubSub from 'pubsub-js';
 import propagating from 'propagating-hammerjs';
 import _Hammer from 'hammerjs';
 import Data from './components/data';
@@ -30,7 +29,7 @@ const App = {
   _bindEvents() {
     const mc1 = new Hammer.Manager(this._rootEl);
     mc1.add(new Hammer.Tap());
-    mc1.on('tap', (ev) => {
+    mc1.on('tap', () => {
       this._sidebar.closeSidebar();
     });
 
@@ -45,10 +44,10 @@ const App = {
     this._gestureManager = new Hammer.Manager(this._rootEl);
     const pan = new Hammer.Pan();
     this._gestureManager.add(pan);
-    this._gestureManager.on('panright', (ev) => {
+    this._gestureManager.on('panright', () => {
       this._sidebar.openSidebar();
     });
-    this._gestureManager.on('panleft', (ev) => {
+    this._gestureManager.on('panleft', () => {
       this._sidebar.closeSidebar();
     });
   },

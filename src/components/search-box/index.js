@@ -1,11 +1,7 @@
-import _Hammer from 'hammerjs';
-import propagating from 'propagating-hammerjs';
 import PubSub from 'pubsub-js';
 import store from '../store';
 
 import {setProto} from '../utils';
-
-const Hammer = propagating(_Hammer);
 
 require('./index.scss');
 
